@@ -81,15 +81,18 @@ export default function Page() {
         <section className="mx-auto max-w-7xl px-6 pb-24 pt-16 lg:px-8 lg:pb-32 lg:pt-24">
           <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
             <div>
-              <div className="mb-6 inline-flex items-center rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-cyan-200">
-                Thermal Infrastructure for Space Compute
-              </div>
-              <h1 className="max-w-4xl text-5xl font-semibold leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
-                Cooling is the bottleneck. Nuwatts is the fix.
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/75 md:text-xl">
-                AI in space is limited by heat, not power. Nuwatts reduces radiator burden by preserving temperature in transport and recovering part of waste heat into useful energy.
-              </p>
+              <div className="mb-4 text-lg md:text-xl font-semibold tracking-[0.04em] text-cyan-200">
+  Thermal Infrastructure for Space Compute
+</div>
+
+<h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-tight text-white md:text-6xl lg:text-7xl">
+  Cooling is the bottleneck.
+  <span className="block text-white">Nuwatts is the fix.</span>
+</h1>
+
+<p className="mt-6 max-w-2xl text-lg leading-8 text-white/75 md:text-xl">
+  AI in space is limited by heat, not power. Nuwatts reduces radiator burden by preserving temperature in transport and recovering part of waste heat into useful energy.
+</p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a href="#cta" className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-white/90">
                   I want more information
