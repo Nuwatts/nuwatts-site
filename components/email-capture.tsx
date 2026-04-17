@@ -59,25 +59,29 @@ export function EmailCapture({ compact = false }: { compact?: boolean }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={compact ? 'flex w-full flex-col gap-3 sm:flex-row' : 'mt-6 flex w-full flex-col gap-3 sm:flex-row'}>
-      <input
-        type="email"
-        name="email"
-        value={email}
-        onChange={(event) => setEmail(event.target.value)}
-        placeholder="Your email"
-        className="min-w-0 flex-1 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-white placeholder:text-white/35 focus:border-cyan-300/40 focus:outline-none"
-        aria-label="Email address"
-        required
-      />
-      <button
-        type="submit"
-        disabled={status === 'loading'}
-        className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-70"
-      >
-        {buttonLabel}
-      </button>
-      {message ? <p className="text-sm text-white/60 sm:basis-full">{message}</p> : null}
-    </form>
+    <form
+  action="https://formsubmit.co/james@nuwatts.com"
+  method="POST"
+  className="mt-6 flex gap-3"
+>
+  <input
+    type="email"
+    name="email"
+    required
+    placeholder="Enter your email"
+    className="flex-1 rounded-full bg-white/10 px-4 py-2 text-white placeholder-white/50 border border-white/20"
+  />
+
+  {/* Hidden fields */}
+  <input type="hidden" name="_subject" value="New Nuwatts Inquiry" />
+  <input type="hidden" name="_captcha" value="false" />
+
+  <button
+    type="submit"
+    className="rounded-full bg-white px-4 py-2 text-black font-semibold"
+  >
+    I want more information
+  </button>
+</form>
   );
 }
