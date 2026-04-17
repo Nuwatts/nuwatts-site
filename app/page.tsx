@@ -176,6 +176,18 @@ export default function Page() {
   </div>
 </Section>
 
+What this does:
+
+left column: visual + DeltaRelationship stacked
+right column: reference panel
+mobile: still stacks naturally
+
+If you want the visual and panel side-by-side, but no animation underneath, then remove this line:
+
+<DeltaRelationship />
+
+and keep the 2-column grid.
+
         <Section id="applications" title="Built for the Next Generation of Compute" copy="The near-term wedge is terrestrial data centers. The long-term upside is space compute, where thermal constraints define the hardware envelope.">
           <div className="grid gap-6 md:grid-cols-2">
             {applications.map((app) => (
