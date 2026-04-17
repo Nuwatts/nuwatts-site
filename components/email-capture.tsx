@@ -75,7 +75,7 @@ export function EmailCapture({ compact = false }: { compact?: boolean }) {
   {/* Hidden fields */}
   <input type="hidden" name="_subject" value="New Nuwatts Inquiry" />
   <input type="hidden" name="_captcha" value="false" />
-
+  <input type="hidden" name="_next" value="https://nuwatts.github.io/nuwatts-site/" />
   <button
     type="submit"
     className="rounded-full bg-white px-4 py-2 text-black font-semibold"
