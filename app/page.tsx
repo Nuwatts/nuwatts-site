@@ -200,7 +200,7 @@ export default function Page() {
         <section id="cta" className="mx-auto max-w-7xl px-6 pb-24 pt-8 lg:px-8 lg:pb-32">
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-10 shadow-2xl backdrop-blur-xl lg:p-14">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.16),transparent_25%),radial-gradient(circle_at_bottom_left,rgba(251,146,60,0.14),transparent_30%)]" />
-            <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div className="relative grid gap-10 lg:grid-cols-1 lg:items-center">
               <div>
                 <div className="text-sm uppercase tracking-[0.2em] text-white/50">Partner with us</div>
                 <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
@@ -210,9 +210,6 @@ export default function Page() {
                   We are building the thermal infrastructure layer for next-generation compute. If you are exploring space compute, advanced thermal architectures, or high-density cooling constraints, this is the right time to talk.
                 </p>
                 <EmailCapture />
-              </div>
-              <div className="rounded-[1.5rem] border border-white/10 bg-black/20 p-6 text-sm leading-7 text-white/65 lg:max-w-sm">
-                Best use on GitHub Pages: connect email capture with Formspree, add a GA4 measurement ID, and publish with the included workflow. The site is static-export compatible and ready for project-page hosting.
               </div>
             </div>
           </div>
