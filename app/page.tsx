@@ -110,12 +110,12 @@ export default function Page() {
                   </div>
                 ))}
               </div>
-              <footer className="text-center text-sm text-white/40 pb-8">
-                <a href="/privacy" className="hover:text-white">
-                  Privacy Policy
-                </a>
-              </footer>
-            </div>
+          <footer className="text-center text-sm text-white/40 pb-8">
+            <a href="/privacy" className="hover:text-white">
+              Privacy Policy
+            </a>
+          </footer>
+          </div>
 
             <VisualCard src="/visuals/hero-system.png" alt="Nuwatts product architecture" priority />
           </div>
