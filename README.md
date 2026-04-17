@@ -12,7 +12,7 @@ A static-export Next.js landing page designed for GitHub Pages hosting, with:
 
 GitHub Pages is a static hosting platform, so this project is configured with Next.js static export using `output: 'export'`. Next.js recommends static export for static hosting, and GitHub Pages supports custom workflow deployments. citeturn249147search2turn842625search0turn842625search2
 
-## Quick start      
+## Quick start       
 
 ```bash
 npm install
