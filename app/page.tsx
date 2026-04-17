@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { EmailCapture } from '@/components/email-capture';
 
 const proofPoints = [
@@ -58,12 +59,14 @@ const competition = [
 
 export default function Page() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-ink text-white">
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-ink text-white">
       <Background />
 
       <header className="sticky top-0 z-50 border-b border-white/10 bg-ink/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <a href="#top" className="text-lg font-semibold tracking-[0.24em] text-white/95">NUWATTS</a>
+          <a href="#top" className="text-lg font-semibold tracking-[0.24em] text-white/95">
+            NUWATTS
+          </a>
           <nav className="hidden gap-6 text-sm text-white/70 md:flex">
             <a href="#problem" className="hover:text-white">Problem</a>
             <a href="#solution" className="hover:text-white">Solution</a>
@@ -71,73 +74,100 @@ export default function Page() {
             <a href="#applications" className="hover:text-white">Applications</a>
             <a href="#competition" className="hover:text-white">Competition</a>
           </nav>
-          <a href="#cta" className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/15">
+          <a
+            href="#cta"
+            className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/15"
+          >
             Get More Info
           </a>
         </div>
       </header>
 
-      <main id="top">
+      <main id="top" className="flex-1">
         <section className="mx-auto max-w-7xl px-6 pb-24 pt-16 lg:px-8 lg:pb-32 lg:pt-24">
           <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
             <div>
-              <div className="mb-4 text-lg md:text-xl font-semibold tracking-[0.04em] text-cyan-200">
-            Thermal Infrastructure for Space Compute
-            </div>
+              <div className="mb-4 text-lg font-semibold tracking-[0.04em] text-cyan-200 md:text-xl">
+                Thermal Infrastructure for Space Compute
+              </div>
 
-            <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-tight text-white md:text-6xl lg:text-7xl">
-            Cooling is the bottleneck.
-              <span className="block text-white">Nuwatts is the fix.</span>
-            </h1>
+              <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-tight text-white md:text-6xl lg:text-7xl">
+                Cooling is the bottleneck.
+                <span className="block text-white">Nuwatts is the fix.</span>
+              </h1>
 
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/75 md:text-xl">
-            AI in space is limited by heat, not power. Nuwatts reduces radiator burden by preserving temperature in transport and recovering part of waste heat into useful energy.
-            </p>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/75 md:text-xl">
+                AI in space is limited by heat, not power. Nuwatts reduces radiator burden by preserving
+                temperature in transport and recovering part of waste heat into useful energy.
+              </p>
+
               <div className="mt-8 flex flex-wrap gap-4">
-                <a href="#cta" className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-white/90">
+                <a
+                  href="#cta"
+                  className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-white/90"
+                >
                   I want more information
                 </a>
-                <a href="#why-it-matters" className="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                <a
+                  href="#why-it-matters"
+                  className="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                >
                   See Why Every Degree Matters
                 </a>
               </div>
+
               <EmailCapture compact />
+
               <div className="mt-10 grid max-w-3xl gap-4 sm:grid-cols-3">
                 {proofPoints.map(([title, sub]) => (
-                  <div key={title} className="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-2xl shadow-black/20 backdrop-blur">
+                  <div
+                    key={title}
+                    className="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-2xl shadow-black/20 backdrop-blur"
+                  >
                     <div className="text-sm font-semibold text-white">{title}</div>
                     <div className="mt-1 text-sm text-white/55">{sub}</div>
                   </div>
                 ))}
               </div>
-          <footer className="text-center text-sm text-white/40 pb-8">
-            <a href="/privacy" className="hover:text-white">
-              Privacy Policy
-            </a>
-          </footer>
-          </div>
+            </div>
 
             <VisualCard src="/visuals/hero-system.png" alt="Nuwatts product architecture" priority />
           </div>
         </section>
 
-        <Section id="problem" title="Cooling, Not Power, Limits Space Compute" copy="In space, heat cannot be removed through convection. Every watt must be transported to a radiator and radiated away. That single constraint drives radiator area, deployables, pointing requirements, and reliability.">
+        <Section
+          id="problem"
+          title="Cooling, Not Power, Limits Space Compute"
+          copy="In space, heat cannot be removed through convection. Every watt must be transported to a radiator and radiated away. That single constraint drives radiator area, deployables, pointing requirements, and reliability."
+        >
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <div className="grid gap-5 sm:grid-cols-2">
               {problemCards.map((card) => (
                 <GlassCard key={card}>{card}</GlassCard>
               ))}
             </div>
-            <VisualCard src="/visuals/problem-slide.png" alt="Problem slide showing data center electricity demand growth and no convection in vacuum" />
+            <VisualCard
+              src="/visuals/problem-slide.png"
+              alt="Problem slide showing data center electricity demand growth and no convection in vacuum"
+            />
           </div>
         </Section>
 
-        <Section id="solution" title="A New Thermal Architecture" copy="Nuwatts treats heat as a resource, not just a burden. By combining efficient heat transport with energy recovery, we reduce the amount of heat that must ultimately be radiated away.">
+        <Section
+          id="solution"
+          title="A New Thermal Architecture"
+          copy="Nuwatts treats heat as a resource, not just a burden. By combining efficient heat transport with energy recovery, we reduce the amount of heat that must ultimately be radiated away."
+        >
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <div className="grid gap-6">
               {solutionPillars.map((pillar) => (
-                <div key={pillar.title} className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400/25 to-cyan-400/25 text-lg">✦</div>
+                <div
+                  key={pillar.title}
+                  className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+                >
+                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400/25 to-cyan-400/25 text-lg">
+                    ✦
+                  </div>
                   <h3 className="text-xl font-semibold text-white">{pillar.title}</h3>
                   <p className="mt-3 text-white/65">{pillar.text}</p>
                 </div>
@@ -147,41 +177,50 @@ export default function Page() {
           </div>
         </Section>
 
-       <Section
-  id="why-it-matters"
-  title="Every Degree Matters"
-  copy="Radiator performance scales with temperature to the fourth power. Small losses in thermal transport can dramatically increase required radiator area."
->
-  <div className="grid gap-8 lg:grid-cols-[1.04fr_0.96fr]">
-    <VisualCard
-      src="/visuals/every-degree-slide.png"
-      alt="Why every degree matters"
-    />
+        <Section
+          id="why-it-matters"
+          title="Every Degree Matters"
+          copy="Radiator performance scales with temperature to the fourth power. Small losses in thermal transport can dramatically increase required radiator area."
+        >
+          <div className="grid gap-8 lg:grid-cols-[1.04fr_0.96fr]">
+            <VisualCard
+              src="/visuals/every-degree-slide.png"
+              alt="Why every degree matters"
+            />
 
-    <Panel>
-      <div className="mb-5 text-sm uppercase tracking-[0.2em] text-white/50">Reference case</div>
-      <div className="space-y-4">
-        <MiniRow left="Chip max temp" right="85°C" />
-        <MiniRow left="Transport drop" right="15°C" accent />
-        <MiniRow left="Radiator temp" right="70°C" />
-        <MiniRow left="Reference heat load" right="100,000 kW" />
-      </div>
-      <div className="mt-6 rounded-2xl bg-black/25 p-5">
-        <div className="text-4xl font-semibold text-orange-300">~3,000 m²</div>
-        <div className="mt-2 text-white/65">
-          radiator area saved per 1°C recovered in a 100 MW system
-        </div>
-      </div>
-      <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-5 text-sm leading-7 text-white/65">
-        The important takeaway is not just efficiency. It is geometry. Preserve temperature in transport and the same heat can be rejected with materially less radiator area.
-      </div>
-    </Panel>
-  </div>
-</Section>
-        <Section id="applications" title="Built for the Next Generation of Compute" copy="The near-term wedge is terrestrial data centers. The long-term upside is space compute, where thermal constraints define the hardware envelope.">
+            <Panel>
+              <div className="mb-5 text-sm uppercase tracking-[0.2em] text-white/50">Reference case</div>
+              <div className="space-y-4">
+                <MiniRow left="Chip max temp" right="85°C" />
+                <MiniRow left="Transport drop" right="15°C" accent />
+                <MiniRow left="Radiator temp" right="70°C" />
+                <MiniRow left="Reference heat load" right="100,000 kW" />
+              </div>
+              <div className="mt-6 rounded-2xl bg-black/25 p-5">
+                <div className="text-4xl font-semibold text-orange-300">~3,000 m²</div>
+                <div className="mt-2 text-white/65">
+                  radiator area saved per 1°C recovered in a 100 MW system
+                </div>
+              </div>
+              <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-5 text-sm leading-7 text-white/65">
+                The important takeaway is not just efficiency. It is geometry. Preserve temperature in
+                transport and the same heat can be rejected with materially less radiator area.
+              </div>
+            </Panel>
+          </div>
+        </Section>
+
+        <Section
+          id="applications"
+          title="Built for the Next Generation of Compute"
+          copy="The near-term wedge is terrestrial data centers. The long-term upside is space compute, where thermal constraints define the hardware envelope."
+        >
           <div className="grid gap-6 md:grid-cols-2">
             {applications.map((app) => (
-              <div key={app.title} className="rounded-[1.75rem] border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+              <div
+                key={app.title}
+                className="rounded-[1.75rem] border border-white/10 bg-white/5 p-8 backdrop-blur-xl"
+              >
                 <div className="text-sm uppercase tracking-[0.18em] text-white/50">Application</div>
                 <h3 className="mt-3 text-2xl font-semibold text-white">{app.title}</h3>
                 <p className="mt-4 text-white/65">{app.text}</p>
@@ -190,18 +229,34 @@ export default function Page() {
           </div>
         </Section>
 
-        <Section id="competition" title="Not a Component. A System Layer." copy="This is the clearest competitive framing: others optimize components. Nuwatts optimizes the thermal system.">
+        <Section
+          id="competition"
+          title="Not a Component. A System Layer."
+          copy="This is the clearest competitive framing: others optimize components. Nuwatts optimizes the thermal system."
+        >
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <div className="grid gap-6">
               {competition.map((item) => (
-                <div key={item.title} className={`rounded-[1.75rem] border p-7 backdrop-blur-xl ${item.emphasis ? 'border-emerald-300/30 bg-emerald-400/10 shadow-[0_0_40px_rgba(16,185,129,0.12)]' : 'border-white/10 bg-white/5'}`}>
-                  <div className="text-sm uppercase tracking-[0.18em] text-white/50">{item.emphasis ? 'System layer' : 'Alternative'}</div>
+                <div
+                  key={item.title}
+                  className={`rounded-[1.75rem] border p-7 backdrop-blur-xl ${
+                    item.emphasis
+                      ? 'border-emerald-300/30 bg-emerald-400/10 shadow-[0_0_40px_rgba(16,185,129,0.12)]'
+                      : 'border-white/10 bg-white/5'
+                  }`}
+                >
+                  <div className="text-sm uppercase tracking-[0.18em] text-white/50">
+                    {item.emphasis ? 'System layer' : 'Alternative'}
+                  </div>
                   <h3 className="mt-3 text-2xl font-semibold text-white">{item.title}</h3>
                   <p className="mt-4 text-white/65">{item.text}</p>
                 </div>
               ))}
             </div>
-            <VisualCard src="/visuals/competition-slide.png" alt="Competition visual comparing incumbents, commodity thermoelectrics, and Nuwatts" />
+            <VisualCard
+              src="/visuals/competition-slide.png"
+              alt="Competition visual comparing incumbents, commodity thermoelectrics, and Nuwatts"
+            />
           </div>
         </Section>
 
@@ -215,7 +270,9 @@ export default function Page() {
                   Seeking pilot partners in data centers and space systems.
                 </h2>
                 <p className="mt-4 max-w-2xl text-lg leading-8 text-white/70">
-                  We are building the thermal infrastructure layer for next-generation compute. If you are exploring space compute, advanced thermal architectures, or high-density cooling constraints, this is the right time to talk.
+                  We are building the thermal infrastructure layer for next-generation compute. If you are
+                  exploring space compute, advanced thermal architectures, or high-density cooling
+                  constraints, this is the right time to talk.
                 </p>
                 <EmailCapture />
               </div>
@@ -223,6 +280,14 @@ export default function Page() {
           </div>
         </section>
       </main>
+
+      <footer className="mt-auto border-t border-white/10 px-6 py-6">
+        <div className="mx-auto max-w-7xl text-center text-sm text-white/50">
+          <Link href="/privacy/" className="hover:text-white">
+            Privacy Policy
+          </Link>
+        </div>
+      </footer>
     </div>
   );
 }
@@ -289,7 +354,11 @@ function VisualCard({ src, alt, priority = false }: { src: string; alt: string; 
 
 function MiniRow({ left, right, accent = false }: { left: string; right: string; accent?: boolean }) {
   return (
-    <div className={`flex items-center justify-between rounded-2xl border px-4 py-3 ${accent ? 'border-orange-300/20 bg-orange-400/10' : 'border-white/10 bg-white/5'}`}>
+    <div
+      className={`flex items-center justify-between rounded-2xl border px-4 py-3 ${
+        accent ? 'border-orange-300/20 bg-orange-400/10' : 'border-white/10 bg-white/5'
+      }`}
+    >
       <span className="text-white/65">{left}</span>
       <span className="font-semibold text-white">{right}</span>
     </div>
