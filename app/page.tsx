@@ -156,12 +156,12 @@ export default function Page() {
         <MiniRow left="Chip max temp" right="85°C" />
         <MiniRow left="Transport drop" right="15°C" accent />
         <MiniRow left="Radiator temp" right="70°C" />
-        <MiniRow left="Reference heat load" right="1 kW" />
+        <MiniRow left="Reference heat load" right="100,000 kW" />
       </div>
       <div className="mt-6 rounded-2xl bg-black/25 p-5">
-        <div className="text-4xl font-semibold text-orange-300">~0.03 m²</div>
+        <div className="text-4xl font-semibold text-orange-300">~3,000 m²</div>
         <div className="mt-2 text-white/65">
-          radiator area saved per 1°C recovered in the current 1 kW reference case
+          radiator area saved per 1°C recovered in a 100 MW system
         </div>
       </div>
       <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-5 text-sm leading-7 text-white/65">
