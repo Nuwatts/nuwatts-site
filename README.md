@@ -1,4 +1,4 @@
-# Nuwatts Space Landing Page   
+# Nuwatts Space Landing Page    
 
 A static-export Next.js landing page designed for GitHub Pages hosting, with:
 - App Router
