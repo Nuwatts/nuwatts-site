@@ -141,11 +141,13 @@ export default function Page() {
         </Section>
 
         <Section id="why-it-matters" title="Every Degree Matters" copy="Radiator performance scales with temperature to the fourth power. Small losses in thermal transport can dramatically increase required radiator area.">
-          <div className="grid gap-8 lg:grid-cols-[1.04fr_0.96fr]">
+         <div className="grid gap-8 lg:grid-cols-1">
   <VisualCard
     src="/visuals/deltaT-visual.png"
-    alt="Why every degree matters - radiator efficiency vs temperature"
+    alt="Why every degree matters"
   />
+
+  <DeltaRelationship />
 
   <Panel>
               <div className="mb-5 text-sm uppercase tracking-[0.2em] text-white/50">Reference case</div>
