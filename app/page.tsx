@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { DeltaRelationship } from '@/components/delta-relationship';
 import { EmailCapture } from '@/components/email-capture';
 
 const proofPoints = [
@@ -146,14 +145,10 @@ export default function Page() {
   copy="Radiator performance scales with temperature to the fourth power. Small losses in thermal transport can dramatically increase required radiator area."
 >
   <div className="grid gap-8 lg:grid-cols-[1.04fr_0.96fr]">
-    <div className="space-y-8">
-      <VisualCard
-        src="/visuals/every-degree-slide.png"
-        alt="Why every degree matters"
-      />
-
-      <DeltaRelationship />
-    </div>
+    <VisualCard
+      src="/visuals/every-degree-slide.png"
+      alt="Why every degree matters"
+    />
 
     <Panel>
       <div className="mb-5 text-sm uppercase tracking-[0.2em] text-white/50">Reference case</div>
@@ -175,7 +170,17 @@ export default function Page() {
     </Panel>
   </div>
 </Section>
+3) Delete these stray pasted lines entirely
 
+Delete all of this text from the file:
+
+That should leave you with:
+
+one image on the left
+one reference panel on the right
+no duplicate “last image” slot
+
+If you want, I can also give you the full cleaned page.tsx ready to paste in one shot.
 What this does:
 
 left column: visual + DeltaRelationship stacked
