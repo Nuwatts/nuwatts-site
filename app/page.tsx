@@ -72,7 +72,7 @@ export default function Page() {
             <a href="#competition" className="hover:text-white">Competition</a>
           </nav>
           <a href="#cta" className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/15">
-            Request Brief
+            Get More Info
           </a>
         </div>
       </header>
@@ -92,7 +92,7 @@ export default function Page() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a href="#cta" className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-white/90">
-                  Request Technical Brief
+                  I want more information
                 </a>
                 <a href="#why-it-matters" className="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
                   See Why Every Degree Matters
