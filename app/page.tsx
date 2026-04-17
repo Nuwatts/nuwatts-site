@@ -140,33 +140,41 @@ export default function Page() {
           </div>
         </Section>
 
-        <Section id="why-it-matters" title="Every Degree Matters" copy="Radiator performance scales with temperature to the fourth power. Small losses in thermal transport can dramatically increase required radiator area.">
-         <div className="grid gap-8 lg:grid-cols-1">
-          <VisualCard
-            src="/visuals/every-degree-slide.png"
-            alt="Why every degree matters"
-          />
+       <Section
+  id="why-it-matters"
+  title="Every Degree Matters"
+  copy="Radiator performance scales with temperature to the fourth power. Small losses in thermal transport can dramatically increase required radiator area."
+>
+  <div className="grid gap-8 lg:grid-cols-[1.04fr_0.96fr]">
+    <div className="space-y-8">
+      <VisualCard
+        src="/visuals/every-degree-slide.png"
+        alt="Why every degree matters"
+      />
 
-          <DeltaRelationship />
+      <DeltaRelationship />
+    </div>
 
-          <Panel>
-              <div className="mb-5 text-sm uppercase tracking-[0.2em] text-white/50">Reference case</div>
-              <div className="space-y-4">
-                <MiniRow left="Chip max temp" right="85°C" />
-                <MiniRow left="Transport drop" right="15°C" accent />
-                <MiniRow left="Radiator temp" right="70°C" />
-                <MiniRow left="Reference heat load" right="1 kW" />
-              </div>
-              <div className="mt-6 rounded-2xl bg-black/25 p-5">
-                <div className="text-4xl font-semibold text-orange-300">~0.03 m²</div>
-                <div className="mt-2 text-white/65">radiator area saved per 1°C recovered in the current 1 kW reference case</div>
-              </div>
-              <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-5 text-sm leading-7 text-white/65">
-                The important takeaway is not just efficiency. It is geometry. Preserve temperature in transport and the same heat can be rejected with materially less radiator area.
-              </div>
-            </Panel>
-          </div>
-        </Section>
+    <Panel>
+      <div className="mb-5 text-sm uppercase tracking-[0.2em] text-white/50">Reference case</div>
+      <div className="space-y-4">
+        <MiniRow left="Chip max temp" right="85°C" />
+        <MiniRow left="Transport drop" right="15°C" accent />
+        <MiniRow left="Radiator temp" right="70°C" />
+        <MiniRow left="Reference heat load" right="1 kW" />
+      </div>
+      <div className="mt-6 rounded-2xl bg-black/25 p-5">
+        <div className="text-4xl font-semibold text-orange-300">~0.03 m²</div>
+        <div className="mt-2 text-white/65">
+          radiator area saved per 1°C recovered in the current 1 kW reference case
+        </div>
+      </div>
+      <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-5 text-sm leading-7 text-white/65">
+        The important takeaway is not just efficiency. It is geometry. Preserve temperature in transport and the same heat can be rejected with materially less radiator area.
+      </div>
+    </Panel>
+  </div>
+</Section>
 
         <Section id="applications" title="Built for the Next Generation of Compute" copy="The near-term wedge is terrestrial data centers. The long-term upside is space compute, where thermal constraints define the hardware envelope.">
           <div className="grid gap-6 md:grid-cols-2">
