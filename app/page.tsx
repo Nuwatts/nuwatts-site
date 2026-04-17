@@ -257,11 +257,13 @@ function Panel({ children }: { children: React.ReactNode }) {
 }
 
 function VisualCard({ src, alt, priority = false }: { src: string; alt: string; priority?: boolean }) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
   return (
     <div className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-3 shadow-[0_0_80px_rgba(0,0,0,0.28)] backdrop-blur-xl">
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-orange-400/10 opacity-0 transition duration-500 group-hover:opacity-100" />
       <Image
-        src={src}
+        src={`${basePath}${src}`}   // 🔥 THIS IS THE FIX
         alt={alt}
         width={1600}
         height={900}
