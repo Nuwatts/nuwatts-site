@@ -73,6 +73,7 @@ export default function Page() {
             <a href="#why-it-matters" className="hover:text-white">Why It Matters</a>
             <a href="#applications" className="hover:text-white">Applications</a>
             <a href="#competition" className="hover:text-white">Competition</a>
+            <a href="#team" className="hover:text-white">Team</a>
           </nav>
           <a
             href="#cta"
