@@ -270,6 +270,16 @@ export default function Page() {
           alt="Nuwatts team visual showing James Ross, Colin Baillie, and Killian Marie"
           />
         </Section>
+        <Section
+          id="team"
+          title="Team"
+          copy="Nuwatts combines deep technical, operational, and strategic expertise across chemistry, commercialization, and company building."
+        >
+          <VisualCard
+            src="/visuals/team-slide.jpg"
+            alt="Nuwatts team visual showing James Ross, Colin Baillie, and Killian Marie"
+          />
+        </Section>
         <section id="cta" className="mx-auto max-w-7xl px-6 pb-24 pt-8 lg:px-8 lg:pb-32">
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-10 shadow-2xl backdrop-blur-xl lg:p-14">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.16),transparent_25%),radial-gradient(circle_at_bottom_left,rgba(251,146,60,0.14),transparent_30%)]" />
