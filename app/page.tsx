@@ -93,13 +93,12 @@ export default function Page() {
               </div>
 
               <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-tight text-white md:text-6xl lg:text-7xl">
-                Cooling is the bottleneck.
-                <span className="block text-white">Nuwatts is the fix.</span>
+                Thermal Infrastructure Is the
+                <span className="block text-white">Hidden Cost of Orbital Compute</span>
               </h1>
 
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/75 md:text-xl">
-                AI in space is limited by heat, not power. Nuwatts reduces radiator burden by preserving
-                temperature in transport and recovering part of waste heat into useful energy.
+                As orbital AI scales from kilowatts to gigawatts, thermal-management overhead and radiator infrastructure become critical constraints on growth.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
