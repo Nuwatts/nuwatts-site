@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nuwatts Thermal Studio</title>
+<style>
+:root{--bg:#07111f;--panel:#101d31;--panel2:#14243a;--text:#eef6ff;--muted:#9fb3ca;--line:rgba(255,255,255,.14);--accent:#55d6be;--accent2:#ffb86b}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#173b5f,#07111f 45%,#050a12);color:var(--text)}.app{display:grid;grid-template-columns:270px 1fr;min-height:100vh}.side{padding:22px 16px;background:rgba(7,17,31,.92);border-right:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;padding-bottom:18px;border-bottom:1px solid var(--line)}.brand img{width:70px;height:auto}.brand h1{font-size:1.05rem;margin:0;line-height:1.08}.brand p{margin:3px 0 0;color:var(--muted);font-size:.78rem}.nav{display:grid;gap:8px;margin-top:18px}.nav button{border:1px solid transparent;background:transparent;color:var(--muted);text-align:left;padding:12px 14px;border-radius:14px;font:inherit;cursor:pointer}.nav button:hover,.nav button.active{background:rgba(85,214,190,.12);border-color:rgba(85,214,190,.3);color:var(--text)}.main{padding:34px clamp(18px,4vw,56px);max-width:1450px}.eyebrow{margin:0 0 8px;color:var(--accent);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.82rem}.title{font-size:clamp(2rem,4vw,4rem);line-height:.96;margin:0}.subtitle{color:var(--muted);line-height:1.55;max-width:900px}.panel{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:24px;padding:22px;margin:18px 0;box-shadow:0 24px 80px rgba(0,0,0,.2)}.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:repeat(2,minmax(230px,1fr));gap:18px 28px}.cards{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:14px}.card{background:var(--panel2);border:1px solid var(--line);border-radius:18px;padding:17px;min-height:95px}.card span{display:block;color:var(--muted);font-size:.88rem;margin-bottom:8px}.card strong{font-size:clamp(1.25rem,2.2vw,1.9rem)}label{display:grid;gap:8px;color:var(--muted);font-weight:650}label span{color:var(--text)}input[type=range]{width:100%;accent-color:var(--accent)}select{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:10px;font:inherit}.chart{width:100%;height:330px;background:rgba(0,0,0,.16);border:1px solid var(--line);border-radius:18px;margin-top:20px}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.arch{background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:18px}.metric{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--line)}.metric:first-of-type{border-top:0}.metric span,.small{color:var(--muted)}.note{color:var(--muted);line-height:1.55}table{width:100%;border-collapse:collapse}td,th{padding:12px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--muted)}@media(max-width:900px){.app{grid-template-columns:1fr}.grid,.cards,.two{grid-template-columns:1fr}.main{padding:24px 14px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><img src="nuwatts-logo-small.png" alt="Nuwatts logo"><div><h1>Nuwatts<br>Thermal Studio</h1><p>Orbital thermal trade tools</p></div></div>
+  <nav class="nav">
+    <button class="active" data-view="home">Home</button>
+    <button data-view="thermal">Orbital Thermal Calculator</button>
+    <button data-view="orbit">Orbit Effects</button>
+    <button data-view="architecture">Architecture Comparison</button>
+    <button data-view="resources">Resources</button>
+  </nav>
+</aside>
+<main class="main">
+  <p class="eyebrow">Nuwatts engineering tool</p>
+  <h2 id="pageTitle" class="title">Orbital Thermal Engineering Suite</h2>
+  <p id="pageSubtitle" class="subtitle">Early trade-study tools for orbital compute: radiator area, thermal mass, environmental effects, and active-versus-passive thermal architecture comparison.</p>
+
+  <section id="home" class="view active">
+    <div class="panel"><h2>Quick baseline</h2><div class="cards">
+      <div class="card"><span>Compute heat</span><strong id="homeHeat">–</strong></div>
+      <div class="card"><span>Heat rejection flux</span><strong id="homeFlux">–</strong></div>
+      <div class="card"><span>Radiator area</span><strong id="homeArea">–</strong></div>
+      <div class="card"><span>Radiator mass</span><strong id="homeMass">–</strong></div>
+    </div><canvas id="homeChart" class="chart" width="1000" height="330"></canvas></div>
+  </section>
+
+  <section id="thermal" class="view">
+    <div class="panel"><h2>Mission inputs</h2><div class="grid">
+      <label>Compute electrical power <span id="computePowerVal">100 kW</span><input id="computePower" type="range" min="1" max="5000" value="100" step="1"></label>
+      <label>Heat fraction <span id="heatFractionVal">98%</span><input id="heatFraction" type="range" min="80" max="100" value="98" step="1"></label>
+      <label>Radiator temperature <span id="tempVal">350 K</span><input id="temp" type="range" min="250" max="500" value="350" step="1"></label>
+      <label>Sink temperature <span id="sinkVal">3 K</span><input id="sink" type="range" min="3" max="300" value="3" step="1"></label>
+      <label>Emissivity <span id="emissivityVal">0.90</span><input id="emissivity" type="range" min="0.50" max="0.98" value="0.90" step="0.01"></label>
+      <label>Environmental derating <span id="derateVal">70%</span><input id="derate" type="range" min="20" max="100" value="70" step="1"></label>
+      <label>Areal density <span id="densityVal">8 kg/m²</span><input id="density" type="range" min="1" max="20" value="8" step="0.1"></label>
+      <label>Radiator type <span id="typeVal">Deployable</span><select id="radiatorType"><option value="fixed">Fixed / body mounted</option><option value="deployable" selected>Deployable panel</option><option value="flexible">Flexible / inflatable concept</option></select></label>
+    </div></div>
+    <div class="panel"><h2>Thermal sizing</h2><div class="cards"><div class="card"><span>Compute heat</span><strong id="tHeat">–</strong></div><div class="card"><span>Flux</span><strong id="tFlux">–</strong></div><div class="card"><span>Area</span><strong id="tArea">–</strong></div><div class="card"><span>Mass</span><strong id="tMass">–</strong></div></div><canvas id="thermalChart" class="chart" width="1000" height="330"></canvas><p class="note">Model: Q = εσA(Tᵣ⁴ − Tₛ⁴) × environmental derating.</p></div>
+  </section>
+
+  <section id="orbit" class="view">
+    <div class="panel"><h2>Orbit effects</h2><div class="grid">
+      <label>Orbit preset <span id="orbitVal">LEO</span><select id="orbit"><option>LEO</option><option>SSO</option><option>GEO</option><option>Deep Space</option></select></label>
+      <label>Sun-facing projected area <span id="sunAreaVal">5 m²</span><input id="sunArea" type="range" min="0" max="100" value="5" step="0.5"></label>
+      <label>Absorptivity <span id="absorptivityVal">0.25</span><input id="absorptivity" type="range" min="0.05" max="0.95" value="0.25" step="0.01"></label>
+      <label>Beta angle <span id="betaVal">30°</span><input id="beta" type="range" min="0" max="90" value="30" step="1"></label>
+    </div></div>
+    <div class="panel"><h2>Environmental heating</h2><div class="cards"><div class="card"><span>Sunlit fraction</span><strong id="sunlitOut">–</strong></div><div class="card"><span>Environmental heat</span><strong id="envOut">–</strong></div><div class="card"><span>Suggested derating</span><strong id="derateOut">–</strong></div><div class="card"><span>Effective flux</span><strong id="orbitFluxOut">–</strong></div></div><canvas id="orbitChart" class="chart" width="1000" height="330"></canvas></div>
+  </section>
+
+  <section id="architecture" class="view">
+    <div class="panel"><h2>Architecture assumptions</h2><div class="grid">
+      <label>Active overhead <span id="activeOverheadVal">5%</span><input id="activeOverhead" type="range" min="0" max="25" value="5" step="0.5"></label>
+      <label>Passive overhead <span id="passiveOverheadVal">0.2%</span><input id="passiveOverhead" type="range" min="0" max="5" value="0.2" step="0.1"></label>
+      <label>Active transport mass <span id="activeMassVal">35%</span><input id="activeMass" type="range" min="0" max="100" value="35" step="1"></label>
+      <label>Passive transport mass <span id="passiveMassVal">15%</span><input id="passiveMass" type="range" min="0" max="100" value="15" step="1"></label>
+    </div><p class="small">Nuwatts-side values are exploratory assumptions, not validated product specifications.</p></div>
+    <div class="panel"><h2>Comparison</h2><div class="two"><div class="arch"><h3>Centralized active</h3><div id="activeMetrics"></div></div><div class="arch"><h3>Distributed passive</h3><div id="passiveMetrics"></div></div></div><canvas id="archChart" class="chart" width="1000" height="330"></canvas></div>
+  </section>
+
+  <section id="resources" class="view">
+    <div class="panel"><h2>Assumptions</h2><table><tr><th>Item</th><th>Current treatment</th></tr><tr><td>Radiator sizing</td><td>First-order Stefan-Boltzmann model</td></tr><tr><td>Orbit effects</td><td>Simplified solar, albedo, and Earth IR estimate</td></tr><tr><td>Nuwatts architecture</td><td>Exploratory passive transport comparison</td></tr></table></div>
+  </section>
+</main></div>
+<script>
+(function(){
+'use strict';
+var sigma=5.670374419e-8;
+var state={computePower:100,heatFraction:98,temp:350,sink:3,emissivity:.90,derate:70,density:8,sunArea:5,absorptivity:.25,beta:30,orbit:'LEO',activeOverhead:5,passiveOverhead:.2,activeMass:35,passiveMass:15};
+function $(id){return document.getElementById(id)}
+function fmt(x,d){return Number(x).toLocaleString(undefined,{maximumFractionDigits:d})}
+function flux(){return Math.max(1,state.emissivity*sigma*(Math.pow(state.temp,4)-Math.pow(state.sink,4))*state.derate/100)}
+function base(overhead,massPct){var heat=state.computePower*state.heatFraction/100,over=state.computePower*overhead/100,total=heat+over,f=flux(),area=total*1000/f,radMass=area*state.density,hw=radMass*massPct/100;return{heat:heat,over:over,total:total,f:f,area:area,radMass:radMass,hw:hw,totalMass:radMass+hw}}
+function set(id,t){var e=$(id); if(e)e.textContent=t}
+function read(){['computePower','heatFraction','temp','sink','emissivity','derate','density','sunArea','absorptivity','beta','activeOverhead','passiveOverhead','activeMass','passiveMass'].forEach(function(id){var e=$(id); if(e)state[id]=Number(e.value)}); var o=$('orbit'); if(o)state.orbit=o.value;}
+function labels(){set('computePowerVal',fmt(state.computePower,0)+' kW');set('heatFractionVal',fmt(state.heatFraction,0)+'%');set('tempVal',fmt(state.temp,0)+' K');set('sinkVal',fmt(state.sink,0)+' K');set('emissivityVal',state.emissivity.toFixed(2));set('derateVal',fmt(state.derate,0)+'%');set('densityVal',fmt(state.density,1)+' kg/m²');set('sunAreaVal',fmt(state.sunArea,1)+' m²');set('absorptivityVal',state.absorptivity.toFixed(2));set('betaVal',fmt(state.beta,0)+'°');set('activeOverheadVal',fmt(state.activeOverhead,1)+'%');set('passiveOverheadVal',fmt(state.passiveOverhead,1)+'%');set('activeMassVal',fmt(state.activeMass,0)+'%');set('passiveMassVal',fmt(state.passiveMass,0)+'%');set('orbitVal',state.orbit)}
+function metric(a,b){return '<div class="metric"><span>'+a+'</span><b>'+b+'</b></div>'}
+function update(){read();labels();var b=base(0,0);['home','t'].forEach(function(p){set(p+'Heat',fmt(b.heat,1)+' kW');set(p+'Flux',fmt(b.f,0)+' W/m²');set(p+'Area',fmt(b.area,0)+' m²');set(p+'Mass',fmt(b.radMass,0)+' kg')});draw('homeChart',['Heat','Flux','Area','Mass'],[b.heat,b.f,b.area,b.radMass],'Baseline thermal sizing');draw('thermalChart',['Heat','Flux','Area','Mass'],[b.heat,b.f,b.area,b.radMass],'Thermal sizing');var env=environment();set('sunlitOut',fmt(env.sunlit,0)+'%');set('envOut',fmt(env.total/1000,2)+' kW');set('derateOut',fmt(env.suggested,0)+'%');set('orbitFluxOut',fmt(state.emissivity*sigma*(Math.pow(state.temp,4)-Math.pow(state.sink,4))*env.suggested/100,0)+' W/m²');draw('orbitChart',['Solar','Albedo','Earth IR','Total'],[env.solar,env.albedo,env.ir,env.total],'Environmental heat input, W');var a=base(state.activeOverhead,state.activeMass),p=base(state.passiveOverhead,state.passiveMass);$('activeMetrics').innerHTML=metric('Total heat to reject',fmt(a.total,1)+' kW')+metric('Radiator area',fmt(a.area,0)+' m²')+metric('Total thermal mass',fmt(a.totalMass,0)+' kg')+metric('Overhead power',fmt(a.over,1)+' kW');$('passiveMetrics').innerHTML=metric('Total heat to reject',fmt(p.total,1)+' kW')+metric('Radiator area',fmt(p.area,0)+' m²')+metric('Total thermal mass',fmt(p.totalMass,0)+' kg')+metric('Overhead power',fmt(p.over,1)+' kW');draw('archChart',['Active area','Passive area','Active mass','Passive mass'],[a.area,p.area,a.totalMass,p.totalMass],'Architecture comparison')}
+function environment(){var sunlit=state.orbit==='Deep Space'?100:Math.max(55,Math.min(100,60+35*Math.sin(state.beta*Math.PI/180)));var al=state.orbit==='GEO'?.1:state.orbit==='Deep Space'?0:.3;var ir=state.orbit==='GEO'?80:state.orbit==='Deep Space'?0:237;var solar=1361*state.absorptivity*state.sunArea*sunlit/100;var alb=1361*al*state.absorptivity*state.sunArea*.35*sunlit/100;var earth=ir*state.sunArea*.45;var total=solar+alb+earth;var suggested=Math.max(20,Math.min(95,100-total/Math.max(1000,state.computePower*1000)*230));return{sunlit:sunlit,solar:solar,albedo:alb,ir:earth,total:total,suggested:suggested}}
+function compact(x){return x>=1000000?(x/1000000).toFixed(1)+'M':x>=1000?(x/1000).toFixed(1)+'k':x.toFixed(x<10?1:0)}
+function draw(id,labels,vals,title){var c=$(id); if(!c||!c.getContext)return;var ctx=c.getContext('2d'),W=c.width,H=c.height;ctx.clearRect(0,0,W,H);ctx.fillStyle='#0b1728';ctx.fillRect(0,0,W,H);var max=Math.max.apply(null,vals.concat([1]))*1.18,pL=80,pT=50,pB=62,pR=25;ctx.fillStyle='#9fb3ca';ctx.font='18px Arial';ctx.textAlign='left';ctx.fillText(title,pL,30);ctx.strokeStyle='rgba(255,255,255,.18)';ctx.beginPath();ctx.moveTo(pL,pT);ctx.lineTo(pL,H-pB);ctx.lineTo(W-pR,H-pB);ctx.stroke();for(var i=0;i<=4;i++){var y=pT+i*(H-pT-pB)/4;ctx.strokeStyle='rgba(255,255,255,.08)';ctx.beginPath();ctx.moveTo(pL,y);ctx.lineTo(W-pR,y);ctx.stroke();ctx.fillStyle='#9fb3ca';ctx.font='12px Arial';ctx.textAlign='right';ctx.fillText(compact(max*(1-i/4)),pL-10,y+4)}var slot=(W-pL-pR)/labels.length,bw=Math.min(95,slot*.56);for(i=0;i<labels.length;i++){var x=pL+i*slot+(slot-bw)/2,h=vals[i]/max*(H-pT-pB),y=H-pB-h;ctx.fillStyle=i%2===0?'#55d6be':'#ffb86b';ctx.fillRect(x,y,bw,h);ctx.fillStyle='#eef6ff';ctx.font='13px Arial';ctx.textAlign='center';ctx.fillText(compact(vals[i]),x+bw/2,Math.max(15,y-8));ctx.fillStyle='#9fb3ca';ctx.fillText(labels[i],x+bw/2,H-28)}}
+document.querySelectorAll('.nav button').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.nav button').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active')});$(btn.dataset.view).classList.add('active');var titles={home:['Orbital Thermal Engineering Suite','Early trade-study tools for orbital compute: radiator area, thermal mass, environmental effects, and active-versus-passive thermal architecture comparison.'],thermal:['Orbital Thermal Calculator','Estimate radiator area, radiator mass, and heat rejection flux.'],orbit:['Orbit Effects Calculator','Estimate solar input, albedo, Earth IR, and effective environmental derating.'],architecture:['Architecture Comparison','Compare centralized active thermal transport with distributed passive architecture modeled after the Nuwatts concept.'],resources:['Resources and Assumptions','Track model assumptions and future upgrades.']};set('pageTitle',titles[btn.dataset.view][0]);set('pageSubtitle',titles[btn.dataset.view][1]);setTimeout(update,50)})});
+document.querySelectorAll('input,select').forEach(function(el){el.addEventListener('input',function(){if(el.id==='radiatorType'){if(el.value==='fixed'){state.density=12;state.derate=70;$('density').value=12;$('derate').value=70;set('typeVal','Fixed')}if(el.value==='deployable'){state.density=8;state.derate=70;$('density').value=8;$('derate').value=70;set('typeVal','Deployable')}if(el.value==='flexible'){state.density=2;state.derate=60;$('density').value=2;$('derate').value=60;set('typeVal','Flexible')}}update()});el.addEventListener('change',update)});
+update();
+})();
+</script>
+</body>
+</html>
