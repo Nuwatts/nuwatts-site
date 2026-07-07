@@ -104,6 +104,7 @@ export default function Page() {
             <a href="#solution" className="hover:text-white">Solution</a>
             <a href="#why-now" className="hover:text-white">Why Now</a>
             <a href="#team" className="hover:text-white">Team</a>
+            <Link href="/tools/" className="hover:text-white">Engineering Suite</Link>
           </nav>
           <a
             href="#cta"
