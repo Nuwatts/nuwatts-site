@@ -1,5 +1,5 @@
 import { EngineeringSuite } from "@/components/engineering-suite";
 
-export default function ToolsPage() {
-  return <EngineeringSuite mode="home" />;
+export default function Page() {
+  return <EngineeringSuite tool="home" />;
 }

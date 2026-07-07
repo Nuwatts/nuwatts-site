@@ -1,5 +1,5 @@
 import { EngineeringSuite } from "@/components/engineering-suite";
 
-export default function TradeStudyPage() {
-  return <EngineeringSuite mode="trade" />;
+export default function Page() {
+  return <EngineeringSuite tool="trade-study" />;
 }

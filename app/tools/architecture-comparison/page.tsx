@@ -1,5 +1,5 @@
 import { EngineeringSuite } from "@/components/engineering-suite";
 
-export default function ArchitectureComparisonPage() {
-  return <EngineeringSuite mode="architecture" />;
+export default function Page() {
+  return <EngineeringSuite tool="architecture-comparison" />;
 }

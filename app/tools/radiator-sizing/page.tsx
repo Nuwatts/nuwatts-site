@@ -1,5 +1,5 @@
 import { EngineeringSuite } from "@/components/engineering-suite";
 
-export default function RadiatorSizingPage() {
-  return <EngineeringSuite mode="radiator" />;
+export default function Page() {
+  return <EngineeringSuite tool="radiator-sizing" />;
 }

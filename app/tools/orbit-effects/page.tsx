@@ -1,5 +1,5 @@
 import { EngineeringSuite } from "@/components/engineering-suite";
 
-export default function OrbitEffectsPage() {
-  return <EngineeringSuite mode="orbit" />;
+export default function Page() {
+  return <EngineeringSuite tool="orbit-effects" />;
 }

@@ -1,5 +1,5 @@
 import { EngineeringSuite } from "@/components/engineering-suite";
 
-export default function ThermalStudioPage() {
-  return <EngineeringSuite mode="thermal" />;
+export default function Page() {
+  return <EngineeringSuite tool="thermal-studio" />;
 }
