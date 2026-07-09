@@ -90,7 +90,7 @@ export function EngineeringSuite({ tool = "home" }: { tool?: ToolKey }) {
     <header className="border-b border-white/10 bg-ink/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-4"><img src="/visuals/nuwatts-logo.png" alt="Nuwatts" className="h-11 w-auto rounded-sm"/><span className="hidden text-sm uppercase tracking-[.24em] text-white/55 sm:block">Engineering Suite</span></Link>
+          <Link href="/" className="flex items-center gap-4"><img src="/nuwatts-site/visuals/nuwatts-logo.png" alt="Nuwatts" className="h-11 w-auto rounded-sm"/><span className="hidden text-sm uppercase tracking-[.24em] text-white/55 sm:block">Engineering Suite</span></Link>
           <Link href="/" className="rounded-full border border-white/15 px-4 py-2 text-sm text-white/70 hover:bg-white/10">Back to Nuwatts</Link>
         </div>
         <nav className="flex gap-2 overflow-x-auto pb-1">{tools.map(t => <Link key={t.key} href={t.href} className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm transition ${t.key===tool ? "border-cyan-300 bg-cyan-300/15 text-cyan-100" : "border-white/10 bg-white/[0.03] text-white/65 hover:bg-white/10"}`}>{t.label}</Link>)}</nav>
