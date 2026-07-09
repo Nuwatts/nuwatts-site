@@ -212,7 +212,7 @@ export default function OrbitalThermalEconomicsApp() {
         <div className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
           <div className="flex flex-wrap items-center justify-between gap-5">
             <div className="flex items-center gap-5">
-              <img src="/visuals/nuwatts-logo.png" alt="Nuwatts" className="h-14 w-auto" />
+              <img src="/nuwatts-site/visuals/nuwatts-logo.png" alt="Nuwatts" className="h-14 w-auto" />
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">Nuwatts Engineering Suite</p>
                 <h1 className="mt-2 text-4xl font-bold tracking-tight md:text-5xl">
