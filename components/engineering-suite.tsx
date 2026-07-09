@@ -3,11 +3,12 @@
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 
-type ToolKey = "home" | "thermal-studio" | "orbit-effects" | "radiator-sizing" | "architecture-comparison" | "trade-study" | "materials" | "reports";
+type ToolKey = "home" | "thermal-studio" | "orbital-economics" | "orbit-effects" | "radiator-sizing" | "architecture-comparison" | "trade-study" | "materials" | "reports";
 
 const tools: { key: ToolKey; label: string; href: string; blurb: string }[] = [
   { key: "home", label: "Tools Home", href: "/tools/", blurb: "Overview of Nuwatts engineering tools" },
   { key: "thermal-studio", label: "Thermal Studio", href: "/tools/thermal-studio/", blurb: "First-order orbital thermal sizing" },
+  { key: "orbital-economics", label: "Orbital Economics", href: "/orbital-thermal-economics/", blurb: "Interactive thermal overhead, radiator area, and mass economics simulator" },
   { key: "orbit-effects", label: "Orbit Effects", href: "/tools/orbit-effects/", blurb: "Solar, albedo, Earth IR, eclipse factors" },
   { key: "radiator-sizing", label: "Radiator Sizing", href: "/tools/radiator-sizing/", blurb: "Area, mass, flux, and deployment burden" },
   { key: "architecture-comparison", label: "Architecture", href: "/tools/architecture-comparison/", blurb: "Centralized active vs distributed passive" },
@@ -89,7 +90,7 @@ export function EngineeringSuite({ tool = "home" }: { tool?: ToolKey }) {
     <header className="border-b border-white/10 bg-ink/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-4"><img src="/nuwatts-site/nuwatts-logo.png" alt="Nuwatts" className="h-11 w-auto rounded-sm"/><span className="hidden text-sm uppercase tracking-[.24em] text-white/55 sm:block">Engineering Suite</span></Link>
+          <Link href="/" className="flex items-center gap-4"><img src="/visuals/nuwatts-logo.png" alt="Nuwatts" className="h-11 w-auto rounded-sm"/><span className="hidden text-sm uppercase tracking-[.24em] text-white/55 sm:block">Engineering Suite</span></Link>
           <Link href="/" className="rounded-full border border-white/15 px-4 py-2 text-sm text-white/70 hover:bg-white/10">Back to Nuwatts</Link>
         </div>
         <nav className="flex gap-2 overflow-x-auto pb-1">{tools.map(t => <Link key={t.key} href={t.href} className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm transition ${t.key===tool ? "border-cyan-300 bg-cyan-300/15 text-cyan-100" : "border-white/10 bg-white/[0.03] text-white/65 hover:bg-white/10"}`}>{t.label}</Link>)}</nav>
