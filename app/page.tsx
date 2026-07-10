@@ -53,38 +53,11 @@ const solutionPillars = [
   },
 ];
 
-const applications = [
-  {
-    title: 'Orbital Compute',
-    text: 'Thermal infrastructure for future orbital data centers, AI satellites, edge compute platforms, and high-density spacecraft systems.',
-  },
-  {
-    title: 'Terrestrial Data Centers',
-    text: 'A near-term proving ground for high-density AI cooling, heat transport, and system-level thermal-overhead reduction.',
-  },
-];
-
 const whyNow = [
   'Launch costs and orbital infrastructure are improving',
   'AI workloads are driving higher compute density',
   'Companies are exploring space-based data centers',
   'Thermal management becomes harder as systems scale',
-];
-
-const competition = [
-  {
-    title: 'Conventional Active Thermal Management',
-    text: 'Uses energy to move heat, creating additional heat that must also be rejected.',
-  },
-  {
-    title: 'Radiator-Only Thinking',
-    text: 'Focuses on heat rejection area but misses the hidden cost of thermal transport overhead.',
-  },
-  {
-    title: 'Nuwatts',
-    text: 'Targets the overhead layer: moving heat with minimal parasitic power so orbital compute can scale more efficiently.',
-    emphasis: true,
-  },
 ];
 
 export default function Page() {
@@ -103,7 +76,6 @@ export default function Page() {
             <a href="#scale" className="hover:text-white">Scale</a>
             <a href="#solution" className="hover:text-white">Solution</a>
             <a href="#why-now" className="hover:text-white">Why Now</a>
-            <a href="#team" className="hover:text-white">Team</a>
             <Link href="/tools/" className="hover:text-white">Engineering Suite</Link>
           </nav>
           <a
@@ -169,7 +141,7 @@ export default function Page() {
         <Section
           id="problem"
           title="Space Compute Has a Heat Problem"
-          copy="Space is cold, but it is also a vacuum. Without air or convection, heat from orbital compute must be transported to radiators and rejected by radiation."
+          copy="Space is cold, but rejecting heat is difficult. Heat from orbital compute must be transported to radiators and rejected by radiation."
         >
           <div className="space-y-12">
             <div className="mx-auto grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -303,107 +275,8 @@ export default function Page() {
               ))}
             </div>
 
-            <div className="w-full">
-              <VisualCard
-                src="/visuals/why-now-slide.png"
-                alt="Why now slide showing orbital compute companies and scaling trends"
-              />
-            </div>
+
           </div>
-        </Section>
-
-        <Section
-          id="why-it-matters"
-          title="Every Degree Still Matters"
-          copy="Radiator performance scales with temperature to the fourth power. Preserving temperature through transport can materially reduce radiator area and mass."
-        >
-          <div className="grid gap-8 lg:grid-cols-[1.04fr_0.96fr]">
-            <VisualCard
-              src="/visuals/every-degree-slide.png"
-              alt="Why every degree matters"
-            />
-
-            <Panel>
-              <div className="mb-5 text-sm uppercase tracking-[0.2em] text-white/50">Reference case</div>
-              <div className="space-y-4">
-                <MiniRow left="Chip max temp" right="85°C" />
-                <MiniRow left="Transport drop" right="15°C" accent />
-                <MiniRow left="Radiator temp" right="70°C" />
-                <MiniRow left="Reference heat load" right="100,000 kW" />
-              </div>
-              <div className="mt-6 rounded-2xl bg-black/25 p-5">
-                <div className="text-4xl font-semibold text-orange-300">~3,000 m²</div>
-                <div className="mt-2 text-white/65">
-                  radiator area saved per 1°C recovered in a 100 MW system
-                </div>
-              </div>
-              <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-5 text-sm leading-7 text-white/65">
-                The important takeaway is not just efficiency. It is geometry. Preserve temperature in
-                transport and the same heat can be rejected with materially less radiator area.
-              </div>
-            </Panel>
-          </div>
-        </Section>
-
-        <Section
-          id="applications"
-          title="Built for the Next Generation of Compute"
-          copy="The long-term opportunity is orbital compute. Terrestrial high-density AI data centers remain a useful proving ground for thermal-overhead reduction."
-        >
-          <div className="grid gap-6 md:grid-cols-2">
-            {applications.map((app) => (
-              <div
-                key={app.title}
-                className="rounded-[1.75rem] border border-white/10 bg-white/5 p-8 backdrop-blur-xl"
-              >
-                <div className="text-sm uppercase tracking-[0.18em] text-white/50">Application</div>
-                <h3 className="mt-3 text-2xl font-semibold text-white">{app.title}</h3>
-                <p className="mt-4 text-white/65">{app.text}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        <Section
-          id="competition"
-          title="Not a Component. A Thermal Infrastructure Layer."
-          copy="The clearest competitive framing: others optimize cooling components. Nuwatts targets the system-level overhead that grows as orbital compute scales."
-        >
-          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-            <div className="grid gap-6">
-              {competition.map((item) => (
-                <div
-                  key={item.title}
-                  className={`rounded-[1.75rem] border p-7 backdrop-blur-xl ${
-                    item.emphasis
-                      ? 'border-emerald-300/30 bg-emerald-400/10 shadow-[0_0_40px_rgba(16,185,129,0.12)]'
-                      : 'border-white/10 bg-white/5'
-                  }`}
-                >
-                  <div className="text-sm uppercase tracking-[0.18em] text-white/50">
-                    {item.emphasis ? 'System layer' : 'Alternative'}
-                  </div>
-                  <h3 className="mt-3 text-2xl font-semibold text-white">{item.title}</h3>
-                  <p className="mt-4 text-white/65">{item.text}</p>
-                </div>
-              ))}
-            </div>
-            <VisualCard
-              src="/visuals/competition-slide.png"
-              alt="Competition visual comparing thermal-management alternatives and Nuwatts"
-            />
-          </div>
-        </Section>
-
-        <Section
-          id="team"
-          title="Team"
-          copy="Nuwatts combines deep technical, operational, and strategic expertise across chemistry, commercialization, and company building."
-        >
-          <VisualCard
-            src="/visuals/team-slide.jpg"
-            alt="Nuwatts team visual showing James Ross and Colin Baillie"
-          />
         </Section>
 
         <section id="cta" className="mx-auto max-w-7xl px-6 pb-24 pt-8 lg:px-8 lg:pb-32">
