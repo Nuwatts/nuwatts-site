@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
 type ToolKey =
@@ -234,6 +234,39 @@ function MiniBars({
 
 export function EngineeringSuite({ tool = "home" }: { tool?: ToolKey }) {
   const [v, setV] = useState<Inputs>(defaults);
+  const [inputsLoaded, setInputsLoaded] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem("nuwatts-engineering-inputs");
+
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setV({
+          ...defaults,
+          ...parsed,
+        });
+      }
+    } catch (error) {
+      console.error("Unable to load saved Engineering Suite inputs:", error);
+    } finally {
+      setInputsLoaded(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!inputsLoaded) return;
+
+    try {
+      window.localStorage.setItem(
+        "nuwatts-engineering-inputs",
+        JSON.stringify(v)
+      );
+    } catch (error) {
+      console.error("Unable to save Engineering Suite inputs:", error);
+    }
+  }, [v, inputsLoaded]);
+
   const set = (k: keyof Inputs) => (n: number) =>
     setV((prev) => ({ ...prev, [k]: n }));
 
