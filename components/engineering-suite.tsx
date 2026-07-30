@@ -340,8 +340,6 @@ export function EngineeringSuite({ tool = "home" }: { tool?: ToolKey }) {
             Reset to Defaults
           </button>
         </div>
-
-        <div className="mb-8">
         
         <div className="mb-8">
           <p className="text-sm uppercase tracking-[.22em] text-cyan-200/80">
