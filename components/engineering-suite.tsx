@@ -269,7 +269,14 @@ export function EngineeringSuite({ tool = "home" }: { tool?: ToolKey }) {
 
   const set = (k: keyof Inputs) => (n: number) =>
     setV((prev) => ({ ...prev, [k]: n }));
-
+  
+  const resetDefaults = () => {
+  setV(defaults);
+  window.localStorage.setItem(
+    "nuwatts-engineering-inputs",
+    JSON.stringify(defaults)
+  );
+};
   const active = useMemo(
     () => scenario(v, v.activeOverhead, v.activeHardware),
     [v]
@@ -324,6 +331,18 @@ export function EngineeringSuite({ tool = "home" }: { tool?: ToolKey }) {
       </header>
 
       <main className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
+
+        <div className="mb-6 flex justify-end">
+          <button
+            onClick={resetDefaults}
+            className="rounded-full border border-white/15 px-4 py-2 text-sm text-white/70 transition hover:bg-white/10"
+          >
+            Reset to Defaults
+          </button>
+        </div>
+
+        <div className="mb-8">
+        
         <div className="mb-8">
           <p className="text-sm uppercase tracking-[.22em] text-cyan-200/80">
             Nuwatts Thermal Infrastructure
