@@ -139,6 +139,46 @@ function ArchitectureDiagram({
 }
 
 
+function ReportMetric({
+  label,
+  conventional,
+  nuwatts,
+  unit,
+}: {
+  label: string;
+  conventional: number;
+  nuwatts: number;
+  unit: string;
+}) {
+  const max = Math.max(Math.abs(conventional), Math.abs(nuwatts), 1);
+  return (
+    <div className="rounded-2xl border border-slate-200 p-5">
+      <div className="flex items-center justify-between gap-4">
+        <h3 className="font-semibold text-slate-950">{label}</h3>
+        <span className="text-xs uppercase tracking-wide text-slate-400">{unit}</span>
+      </div>
+      <div className="mt-5 space-y-4">
+        <div>
+          <div className="mb-1 flex justify-between text-xs text-slate-600">
+            <span>Conventional</span><span>{fmt(conventional)} {unit}</span>
+          </div>
+          <div className="h-3 overflow-hidden rounded-full bg-slate-100">
+            <div className="h-3 rounded-full bg-orange-500" style={{ width: `${Math.max(2, conventional / max * 100)}%` }} />
+          </div>
+        </div>
+        <div>
+          <div className="mb-1 flex justify-between text-xs text-slate-600">
+            <span>Nuwatts</span><span>{fmt(nuwatts)} {unit}</span>
+          </div>
+          <div className="h-3 overflow-hidden rounded-full bg-slate-100">
+            <div className="h-3 rounded-full bg-cyan-600" style={{ width: `${Math.max(2, nuwatts / max * 100)}%` }} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SystemReport({
   computeKw,
   orbit,
@@ -180,218 +220,212 @@ function SystemReport({
   };
   onClose: () => void;
 }) {
-  const massReductionPct =
-    results.conventionalMass > 0
-      ? (results.massSavings / results.conventionalMass) * 100
-      : 0;
+  const massReductionPct = results.conventionalMass > 0
+    ? (results.massSavings / results.conventionalMass) * 100 : 0;
+  const areaReductionPct = results.conventionalArea > 0
+    ? (results.areaReduction / results.conventionalArea) * 100 : 0;
+  const overheadReductionPct = results.conventionalOverheadKw > 0
+    ? (results.powerSavedKw / results.conventionalOverheadKw) * 100 : 0;
 
-  const areaReductionPct =
-    results.conventionalArea > 0
-      ? (results.areaReduction / results.conventionalArea) * 100
-      : 0;
-
-  const overheadReductionPct =
-    results.conventionalOverheadKw > 0
-      ? (results.powerSavedKw / results.conventionalOverheadKw) * 100
-      : 0;
+  const generatedDate = new Date().toLocaleDateString(undefined, {
+    year: "numeric", month: "long", day: "numeric",
+  });
+  const reportId = `NW-${orbit}-${payload.replace(/[^A-Za-z]/g, "").slice(0, 4).toUpperCase()}-${Math.round(computeKw)}`;
 
   return (
     <div className="mt-8">
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3 print:hidden">
-        <button
-          type="button"
-          onClick={onClose}
-          className="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100"
-        >
+        <button type="button" onClick={onClose}
+          className="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100">
           Return to Simulator
         </button>
-
-        <button
-          type="button"
-          onClick={() => window.print()}
-          className="rounded-full bg-cyan-600 px-5 py-3 text-sm font-bold text-white hover:bg-cyan-700"
-        >
+        <button type="button" onClick={() => window.print()}
+          className="rounded-full bg-cyan-600 px-5 py-3 text-sm font-bold text-white hover:bg-cyan-700">
           Print / Save as PDF
         </button>
       </div>
 
-      <article
-        id="system-report"
-        className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200 md:p-10"
-      >
-        <header className="border-b border-slate-200 pb-6">
-          <div className="flex flex-wrap items-start justify-between gap-6">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+      <article id="system-report" className="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200">
+        <header className="relative overflow-hidden bg-slate-950 px-8 py-10 text-white md:px-12 md:py-14">
+          <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+          <div className="relative flex flex-wrap items-start justify-between gap-8">
+            <div className="max-w-3xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300">
                 Nuwatts Engineering Suite
               </p>
-              <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
+              <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
                 Orbital Thermal System Report
               </h1>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
-                Preliminary system-level comparison of a conventional spacecraft
-                thermal architecture and a Nuwatts-enabled thermal architecture.
+              <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300">
+                System-level screening comparison of conventional active thermal
+                management and a Nuwatts-enabled passive thermal architecture.
               </p>
             </div>
-
-            <img
-              src="/visuals/nuwatts-logo.png"
-              alt="Nuwatts"
-              className="h-12 w-auto"
-            />
+            <img src="/visuals/nuwatts-logo.png" alt="Nuwatts" className="h-14 w-auto rounded-sm bg-white p-1" />
+          </div>
+          <div className="relative mt-10 grid gap-4 border-t border-white/15 pt-6 text-sm sm:grid-cols-3">
+            <div><span className="block text-slate-400">Report ID</span><strong>{reportId}</strong></div>
+            <div><span className="block text-slate-400">Generated</span><strong>{generatedDate}</strong></div>
+            <div><span className="block text-slate-400">Analysis status</span><strong>Preliminary trade study</strong></div>
           </div>
         </header>
 
-        <section className="mt-7">
-          <h2 className="text-xl font-bold text-slate-950">Mission Summary</h2>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              ["Payload load", formatPower(computeKw)],
-              ["Payload type", payload],
-              ["Orbit", orbit],
-              ["Conventional architecture", architecture],
-            ].map(([label, value]) => (
-              <div key={label} className="rounded-2xl border border-slate-200 p-4">
-                <p className="text-xs uppercase tracking-wide text-slate-500">{label}</p>
-                <p className="mt-2 font-bold text-slate-950">{value}</p>
+        <div className="p-8 md:p-12">
+          <section>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-700">01 — Executive Summary</p>
+            <h2 className="mt-2 text-2xl font-bold text-slate-950">Modeled system impact</h2>
+            <p className="mt-4 max-w-4xl leading-7 text-slate-600">
+              For a <strong>{formatPower(computeKw)}</strong> {payload.toLowerCase()} payload in {orbit},
+              the model estimates that a Nuwatts-enabled architecture could reduce thermal-management
+              overhead by <strong>{formatPower(results.powerSavedKw)}</strong>, thermal-system mass by{" "}
+              <strong>{fmt(results.massSavings)} kg</strong>, and radiator area by{" "}
+              <strong>{fmt(results.areaReduction)} m²</strong> relative to the selected {architecture.toLowerCase()} baseline.
+            </p>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                ["Power overhead reduction", `${fmt(overheadReductionPct)}%`, formatPower(results.powerSavedKw)],
+                ["Thermal mass reduction", `${fmt(massReductionPct)}%`, `${fmt(results.massSavings)} kg`],
+                ["Radiator area reduction", `${fmt(areaReductionPct)}%`, `${fmt(results.areaReduction)} m²`],
+                ["Launch-cost implication", dollars(results.launchCostSavings), `$${launchCostPerKg.toLocaleString()}/kg basis`],
+              ].map(([label, value, note]) => (
+                <div key={label} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{label}</p>
+                  <p className="mt-3 text-2xl font-bold text-slate-950">{value}</p>
+                  <p className="mt-1 text-xs text-slate-500">{note}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-10 border-t border-slate-200 pt-10">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-700">02 — Mission Definition</p>
+            <h2 className="mt-2 text-2xl font-bold text-slate-950">Scenario inputs</h2>
+            <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200">
+              <table className="w-full border-collapse text-sm">
+                <tbody>
+                  {[
+                    ["Payload load", formatPower(computeKw), "Payload type", payload],
+                    ["Orbit", orbit, "Conventional architecture", architecture],
+                    ["Radiator temperature", `${fmt(radiatorTempK, 0)} K`, "Radiator emissivity", fmt(emissivity, 2)],
+                    ["Specific radiator mass", `${fmt(specificMass)} kg/m²`, "Representative flux", `${fmt(results.representativeFluxKwM2, 2)} kW/m²`],
+                    ["Conventional overhead", `${fmt(conventionalOverheadPct)}%`, "Nuwatts overhead", `${fmt(nuwattsOverhead, 2)}%`],
+                  ].map((row, i) => (
+                    <tr key={i} className="border-t border-slate-200 first:border-t-0">
+                      <th className="bg-slate-50 px-4 py-3 text-left font-semibold text-slate-600">{row[0]}</th>
+                      <td className="px-4 py-3 font-medium text-slate-950">{row[1]}</td>
+                      <th className="bg-slate-50 px-4 py-3 text-left font-semibold text-slate-600">{row[2]}</th>
+                      <td className="px-4 py-3 font-medium text-slate-950">{row[3]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section className="mt-10 border-t border-slate-200 pt-10">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-700">03 — Architecture Comparison</p>
+            <h2 className="mt-2 text-2xl font-bold text-slate-950">Conventional versus Nuwatts</h2>
+            <div className="mt-6 grid gap-5 lg:grid-cols-3">
+              <ReportMetric label="Thermal overhead" conventional={results.conventionalOverheadKw} nuwatts={results.nuwattsOverheadKw} unit="kW" />
+              <ReportMetric label="Radiator area" conventional={results.conventionalArea} nuwatts={results.nuwattsArea} unit="m²" />
+              <ReportMetric label="Thermal-system mass" conventional={results.conventionalMass} nuwatts={results.nuwattsMass} unit="kg" />
+            </div>
+            <div className="mt-6 overflow-x-auto rounded-2xl border border-slate-200">
+              <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+                <thead className="bg-slate-950 text-white">
+                  <tr><th className="px-4 py-3">Metric</th><th className="px-4 py-3">Conventional</th><th className="px-4 py-3">Nuwatts</th><th className="px-4 py-3">Modeled benefit</th></tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Thermal overhead", formatPower(results.conventionalOverheadKw), formatPower(results.nuwattsOverheadKw), `${formatPower(results.powerSavedKw)} lower`],
+                    ["Total heat rejected", formatPower(results.conventionalHeatKw), formatPower(results.nuwattsHeatKw), `${formatPower(results.powerSavedKw)} lower`],
+                    ["Radiator area", `${fmt(results.conventionalArea)} m²`, `${fmt(results.nuwattsArea)} m²`, `${fmt(results.areaReduction)} m² lower`],
+                    ["Thermal-system mass", `${fmt(results.conventionalMass)} kg`, `${fmt(results.nuwattsMass)} kg`, `${fmt(results.massSavings)} kg lower`],
+                    ["Annual electrical allocation", "Baseline", `${fmt(results.annualEnergySavedKwh, 0)} kWh avoided`, "Available for payload use"],
+                  ].map((row) => (
+                    <tr key={row[0]} className="border-t border-slate-200">
+                      {row.map((cell, i) => <td key={i} className={`px-4 py-3 ${i === 0 ? "font-semibold text-slate-950" : "text-slate-700"}`}>{cell}</td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section className="mt-10 border-t border-slate-200 pt-10">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-700">04 — Infrastructure Implications</p>
+            <h2 className="mt-2 text-2xl font-bold text-slate-950">Secondary system effects</h2>
+            <div className="mt-5 grid gap-5 md:grid-cols-3">
+              <div className="rounded-2xl border border-slate-200 p-5">
+                <p className="text-sm text-slate-500">Solar-array mass reduction</p>
+                <p className="mt-2 text-2xl font-bold">{fmt(results.solarArrayMassReduction)} kg</p>
+                <p className="mt-2 text-xs leading-5 text-slate-500">Uses a placeholder solar specific power of {solarSpecificPowerWkg} W/kg.</p>
               </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-8">
-          <h2 className="text-xl font-bold text-slate-950">Architecture Comparison</h2>
-          <div className="mt-4 overflow-x-auto rounded-2xl border border-slate-200">
-            <table className="w-full min-w-[680px] border-collapse text-left text-sm">
-              <thead className="bg-slate-100 text-slate-700">
-                <tr>
-                  <th className="px-4 py-3 font-semibold">Metric</th>
-                  <th className="px-4 py-3 font-semibold">Conventional</th>
-                  <th className="px-4 py-3 font-semibold">Nuwatts</th>
-                  <th className="px-4 py-3 font-semibold">Difference</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ["Thermal overhead", formatPower(results.conventionalOverheadKw), formatPower(results.nuwattsOverheadKw), `${formatPower(results.powerSavedKw)} saved`],
-                  ["Total heat rejected", formatPower(results.conventionalHeatKw), formatPower(results.nuwattsHeatKw), `${formatPower(results.powerSavedKw)} lower`],
-                  ["Radiator area", `${fmt(results.conventionalArea)} m²`, `${fmt(results.nuwattsArea)} m²`, `${fmt(results.areaReduction)} m² lower`],
-                  ["Estimated thermal mass", `${fmt(results.conventionalMass)} kg`, `${fmt(results.nuwattsMass)} kg`, `${fmt(results.massSavings)} kg lower`],
-                ].map((row) => (
-                  <tr key={row[0]} className="border-t border-slate-200">
-                    {row.map((cell, index) => (
-                      <td
-                        key={`${row[0]}-${index}`}
-                        className={`px-4 py-3 ${index === 0 ? "font-semibold text-slate-950" : "text-slate-700"}`}
-                      >
-                        {cell}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section className="mt-8">
-          <h2 className="text-xl font-bold text-slate-950">System Impact</h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              ["Thermal overhead reduction", `${fmt(overheadReductionPct)}%`, `${formatPower(results.powerSavedKw)} recovered`],
-              ["Thermal mass reduction", `${fmt(massReductionPct)}%`, `${fmt(results.massSavings)} kg modeled reduction`],
-              ["Radiator area reduction", `${fmt(areaReductionPct)}%`, `${fmt(results.areaReduction)} m² modeled reduction`],
-              ["Estimated launch-cost impact", dollars(results.launchCostSavings), `Based on $${launchCostPerKg.toLocaleString()}/kg`],
-              ["Solar-array mass reduction", `${fmt(results.solarArrayMassReduction)} kg`, `Based on ${solarSpecificPowerWkg} W/kg`],
-              ["Annual power allocation avoided", `${fmt(results.annualEnergySavedKwh, 0)} kWh`, "Continuous annual equivalent"],
-            ].map(([label, value, note]) => (
-              <div key={label} className="rounded-2xl border border-slate-200 p-5">
-                <p className="text-sm text-slate-500">{label}</p>
-                <p className="mt-2 text-2xl font-bold text-slate-950">{value}</p>
-                <p className="mt-1 text-xs text-slate-500">{note}</p>
+              <div className="rounded-2xl border border-slate-200 p-5">
+                <p className="text-sm text-slate-500">Launch-cost implication</p>
+                <p className="mt-2 text-2xl font-bold">{dollars(results.launchCostSavings)}</p>
+                <p className="mt-2 text-xs leading-5 text-slate-500">Illustrative only; uses ${launchCostPerKg.toLocaleString()}/kg.</p>
               </div>
-            ))}
-          </div>
-        </section>
+              <div className="rounded-2xl border border-slate-200 p-5">
+                <p className="text-sm text-slate-500">Payload power enabled</p>
+                <p className="mt-2 text-2xl font-bold">{formatPower(results.powerSavedKw)}</p>
+                <p className="mt-2 text-xs leading-5 text-slate-500">Represents modeled reduction in parasitic thermal-management demand.</p>
+              </div>
+            </div>
+          </section>
 
-        <section className="mt-8">
-          <h2 className="text-xl font-bold text-slate-950">Model Assumptions</h2>
-          <div className="mt-4 grid gap-x-8 gap-y-3 rounded-2xl border border-slate-200 p-5 text-sm text-slate-700 sm:grid-cols-2">
-            <p>Conventional overhead: {fmt(conventionalOverheadPct)}%</p>
-            <p>Nuwatts overhead: {fmt(nuwattsOverhead, 2)}%</p>
-            <p>Radiator temperature: {fmt(radiatorTempK, 0)} K</p>
-            <p>Radiator emissivity: {fmt(emissivity, 2)}</p>
-            <p>Specific radiator mass: {fmt(specificMass)} kg/m²</p>
-            <p>Representative radiator flux: {fmt(results.representativeFluxKwM2, 2)} kW/m²</p>
-            <p>Launch-cost assumption: ${launchCostPerKg.toLocaleString()}/kg</p>
-            <p>Solar specific power: {solarSpecificPowerWkg} W/kg</p>
-          </div>
-        </section>
+          <section className="mt-10 border-t border-slate-200 pt-10">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-700">05 — Engineering Basis</p>
+            <h2 className="mt-2 text-2xl font-bold text-slate-950">Assumptions and limitations</h2>
+            <div className="mt-5 grid gap-6 lg:grid-cols-2">
+              <div className="rounded-2xl border border-slate-200 p-5">
+                <h3 className="font-bold">Model basis</h3>
+                <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
+                  <li>• Graybody Stefan–Boltzmann radiator scaling.</li>
+                  <li>• Simplified orbit derating factor rather than time-resolved mission analysis.</li>
+                  <li>• User-selected radiator specific mass and architecture proxy.</li>
+                  <li>• Continuous payload and thermal-overhead assumptions.</li>
+                </ul>
+              </div>
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+                <h3 className="font-bold">Required validation</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-700">
+                  Replace screening assumptions with mission-specific view factors, attitude,
+                  eclipse history, environmental loads, redundancy, transport distances,
+                  component qualification data, and measured Nuwatts prototype performance
+                  before making flight-design or procurement decisions.
+                </p>
+              </div>
+            </div>
+          </section>
 
-        <section className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-5">
-          <h2 className="font-bold text-slate-950">Interpretation and Limitations</h2>
-          <p className="mt-3 text-sm leading-6 text-slate-700">
-            Under the selected assumptions, the Nuwatts-enabled case reduces modeled
-            thermal overhead by {formatPower(results.powerSavedKw)}, radiator area by{" "}
-            {fmt(results.areaReduction)} m², and thermal-system mass by{" "}
-            {fmt(results.massSavings)} kg relative to the selected conventional
-            architecture. These values are first-order screening estimates and are
-            sensitive to mission-specific assumptions.
-          </p>
-        </section>
-
-        <footer className="mt-8 border-t border-slate-200 pt-5 text-xs leading-5 text-slate-500">
-          Nuwatts Engineering Suite — preliminary analysis only. This report is
-          intended for early trade studies, customer and investor discussion, and
-          architecture exploration. It is not a substitute for mission-specific
-          thermal analysis, component qualification, or flight design.
-        </footer>
+          <footer className="mt-10 border-t border-slate-200 pt-6 text-xs leading-5 text-slate-500">
+            <div className="flex flex-wrap justify-between gap-4">
+              <p>© Nuwatts — Confidential preliminary engineering analysis</p>
+              <p>{reportId} · {generatedDate}</p>
+            </div>
+          </footer>
+        </div>
       </article>
 
       <style jsx global>{`
         @media print {
-          @page {
-            size: auto;
-            margin: 0.45in;
-          }
-
-          body * {
-            visibility: hidden !important;
-          }
-
-          #system-report,
-          #system-report * {
-            visibility: visible !important;
-          }
-
+          @page { size: letter; margin: 0.4in; }
+          body * { visibility: hidden !important; }
+          #system-report, #system-report * { visibility: visible !important; }
           #system-report {
-            position: absolute !important;
-            left: 0 !important;
-            top: 0 !important;
-            width: 100% !important;
-            background: white !important;
-            color: black !important;
-            border: none !important;
-            border-radius: 0 !important;
+            position: absolute !important; left: 0 !important; top: 0 !important;
+            width: 100% !important; border: 0 !important; border-radius: 0 !important;
             box-shadow: none !important;
-            padding: 0 !important;
           }
-
-          #system-report * {
-            color: black !important;
-            box-shadow: none !important;
-            text-shadow: none !important;
-          }
-
-          #system-report section,
-          #system-report table,
-          #system-report .rounded-2xl {
+          #system-report section, #system-report table, #system-report .rounded-2xl {
             break-inside: avoid;
           }
-
-          .print\\:hidden {
-            display: none !important;
+          #system-report header {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
           }
+          .print\\:hidden { display: none !important; }
         }
       `}</style>
     </div>
