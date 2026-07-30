@@ -399,7 +399,7 @@ function HiddenCostVisual() {
 }
 
 function VisualCard({ src, alt, priority = false }: { src: string; alt: string; priority?: boolean }) {
-  const basePath = '/nuwatts-site';
+  const basePath = '';
 
   return (
     <div className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-3 shadow-[0_0_80px_rgba(0,0,0,0.28)] backdrop-blur-xl">
