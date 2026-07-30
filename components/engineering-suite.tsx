@@ -340,9 +340,6 @@ export function EngineeringSuite({ tool = "home" }: { tool?: ToolKey }) {
       </header>
 
       <main className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
-
-        <div className="mb-8">
-        
         <div className="mb-8">
           <p className="text-sm uppercase tracking-[.22em] text-cyan-200/80">
             Nuwatts Thermal Infrastructure
